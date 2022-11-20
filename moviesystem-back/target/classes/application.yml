@@ -1,0 +1,33 @@
+
+# mysql
+spring:
+  datasource:
+    #MySQL配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/movie?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 9821
+  jpa:
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+  servlet:
+    #上传文件
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+    resources:
+      static-locations: classpath:/static/upImag
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.demo.model
+server:
+  port: 9000
+
+
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.sportplay.dao.TypeDao">
+    <select id="getTypes" resultType="com.example.sportplay.bean.Type">
+        SELECT * FROM  type
+    </select>
+
+    <select id="getAllType" resultType="com.example.sportplay.bean.Type">
+       	SELECT * FROM  type
+        <if test="name !=null ">
+            WHERE name like #{name}
+        </if>
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="getTypeCounts" resultType="java.lang.Integer">
+       	SELECT count(*) FROM `type`
+        <if test="name !=null ">
+            WHERE  name like #{name}
+        </if>
+    </select>
+
+    <select id="getUpdateType" resultType="com.example.sportplay.bean.Type">
+        SELECT * FROM type WHERE id = #{id}
+    </select>
+
+    <insert id="addType">
+        INSERT INTO  type
+        (name,createUser,createDate)
+        VALUE
+        (#{name},#{createUser},#{createDate})
+    </insert>
+
+    <update id="editType">
+        UPDATE  type  SET  name = #{name} ,createUser= #{createUser} ,
+        createDate = #{createDate}  WHERE id = #{id}
+    </update>
+
+
+    <delete id="deleteType">
+        DELETE FROM type WHERE id = #{id}
+    </delete>
+
+</mapper>

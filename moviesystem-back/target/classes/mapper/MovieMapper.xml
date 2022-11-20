@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.sportplay.dao.MovieDao">
+
+    <select id="getAllMovie" resultType="com.example.sportplay.bean.Movie">
+       	SELECT * FROM  movie
+        <if test="movieName !=null ">
+            WHERE movieName like #{movieName}
+        </if>
+        <if test="type !=null ">
+            and type like #{type}
+        </if>
+        <if test="actor !=null ">
+            and actor like #{actor}
+        </if>
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="getMovieCounts" resultType="java.lang.Integer">
+       	SELECT count(*) FROM `movie`
+        <if test="movieName !=null ">
+            WHERE movieName like #{movieName}
+        </if>
+        <if test="type !=null ">
+            and type like #{type}
+        </if>
+        <if test="actor !=null ">
+            and actor like #{actor}
+        </if>
+    </select>
+
+    <select id="getUpdateMovie" resultType="com.example.sportplay.bean.Movie">
+        SELECT * FROM movie WHERE id = #{id}
+    </select>
+
+    <insert id="addMovie">
+        INSERT INTO  movie
+        (movieName,type,actor,director,minS,film,movieDate)
+        VALUE
+        (#{movieName},#{type},#{actor},#{director},#{minS},#{film},#{movieDate})
+    </insert>
+
+    <update id="editMovie">
+        UPDATE  movie  SET  movieName = #{movieName} ,type= #{type} ,
+        actor = #{actor} , director = #{director} ,minS= #{minS} ,
+        movieDate = #{movieDate} ,film = #{film}  WHERE id = #{id}
+    </update>
+
+
+    <delete id="deleteMovie">
+        DELETE FROM movie WHERE id = #{id}
+    </delete>
+
+</mapper>

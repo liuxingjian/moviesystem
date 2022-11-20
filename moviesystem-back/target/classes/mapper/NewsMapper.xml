@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.sportplay.dao.NewsDao">
+
+    <select id="getAllNews" resultType="com.example.sportplay.bean.News">
+       	SELECT * FROM  news
+        <if test="title !=null ">
+            WHERE title like #{title}
+        </if>
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="getNewsCounts" resultType="java.lang.Integer">
+       	SELECT count(*) FROM `news`
+        <if test="title !=null ">
+            WHERE  title like #{title}
+        </if>
+    </select>
+
+    <select id="getUpdateNews" resultType="com.example.sportplay.bean.News">
+        SELECT * FROM news WHERE id = #{id}
+    </select>
+
+    <insert id="addNews">
+        INSERT INTO  news
+        (title,newsType,content,newsDate)
+        VALUE
+        (#{title},#{newsType},#{content},#{newsDate})
+    </insert>
+
+    <update id="editNews">
+        UPDATE  news  SET  title = #{title} ,newsType= #{newsType} ,
+        content = #{content},newsDate=#{newsDate}  WHERE id = #{id}
+    </update>
+
+
+    <delete id="deleteNews">
+        DELETE FROM news WHERE id = #{id}
+    </delete>
+
+</mapper>

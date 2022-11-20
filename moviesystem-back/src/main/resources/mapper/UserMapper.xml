@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.sportplay.dao.UserDao">
+
+    <select id="getAllUser" resultType="com.example.sportplay.bean.User">
+       	SELECT * FROM easyUser
+        <if test="username !=null ">
+            WHERE username like #{username}
+        </if>
+        LIMIT #{pageStart},#{pageSize}
+    </select>
+
+    <select id="getUserCounts" resultType="java.lang.Integer">
+       	SELECT count(*) FROM `easyuser`
+        <if test="username !=null ">
+            WHERE username like #{username}
+        </if>
+    </select>
+
+    <select id="getUpdateUser" resultType="com.example.sportplay.bean.User">
+        SELECT * FROM easyuser WHERE id = #{id}
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO easyuser
+        (username,password,email,role,state)
+        VALUE
+        (#{username},#{password},#{email},#{role},#{state})
+    </insert>
+
+    <update id="editUser">
+        UPDATE easyuser SET username = #{username} , password = #{password} ,
+        email = #{email}, role = #{role} WHERE id = #{id}
+    </update>
+
+    <update id="updateState">
+        UPDATE easyuser SET state = #{state} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM easyuser WHERE id = #{id}
+    </delete>
+
+</mapper>

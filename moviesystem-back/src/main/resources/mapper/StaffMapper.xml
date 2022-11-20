@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.sportplay.dao.StaffDao">
+    <select id="getAllStaff" resultType="com.example.sportplay.bean.Staff">
+        select * from staff
+    </select>
+
+    <insert id="addStaff">
+        insert into staff
+            (name, sex, tel)
+        value
+            (#{name},#{sex},#{tel})
+    </insert>
+
+    <delete id="deleteStaff">
+        delete from staff where id=#{id}
+    </delete>
+
+    <update id="editStaff">
+        update staff set name=#{name},sex=#{sex},tel=#{tel} where id=#{id}
+    </update>
+
+    <select id="getStaff" resultType="com.example.sportplay.bean.Staff">
+        select * from staff where id=#{id}
+    </select>
+
+
+</mapper>
